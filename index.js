@@ -45,12 +45,13 @@ class FBMessenger {
     return this.sendMessage({id, data, ...rest})
   }
 
-  async sendImageMessage ({id, url, ...rest}) {
+  async sendImageMessage ({id, url, attachment_id, ...rest}) {
     const data = {
       attachment: {
         type: 'image',
         payload: {
-          url
+          url,
+          attachment_id
         }
       }
     }
