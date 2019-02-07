@@ -198,6 +198,8 @@ class FBMessenger {
             body.tag = rest.tag
         }
 
+        console.log(body)
+
         return (await fetch(`https://graph.facebook.com/v2.6/me/messages?access_token=${rest.token || this.token}`,
             {
                 method: 'POST',
