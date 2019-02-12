@@ -72,7 +72,7 @@ class FBMessenger {
 
     // START TEMPLATES
 
-    async sendQuickRepliesMessage({ id, attachment, quickReplies, ...rest }) {
+    async sendQuickRepliesMessage({ id, attachment, attachment_id, quickReplies, ...rest }) {
         const attachmentType = typeof attachment === 'string' ? 'text' : 'attachment'
         const attachmentObject = typeof attachment === 'string' ? attachment : {
             type: 'template',
@@ -85,6 +85,7 @@ class FBMessenger {
             [attachmentType]: attachmentObject,
             quick_replies: quickReplies
         }
+        if (attachment_id) { data.attachment_id = attachment_id }
         return this.sendMessage({ id, data, ...rest })
     }
 
@@ -197,7 +198,7 @@ class FBMessenger {
             body.messaging_type = 'MESSAGE_TAG'
             body.tag = rest.tag
         }
-        
+
         return (await fetch(`https://graph.facebook.com/v2.6/me/messages?access_token=${rest.token || this.token}`,
             {
                 method: 'POST',
