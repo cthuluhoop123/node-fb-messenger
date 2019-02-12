@@ -74,13 +74,7 @@ class FBMessenger {
 
     async sendQuickRepliesMessage({ id, attachment, quickReplies, ...rest }) {
         const attachmentType = typeof attachment === 'string' ? 'text' : 'attachment'
-        const attachmentObject = typeof attachment === 'string' ? attachment : {
-            type: 'template',
-            payload: {
-                template_type: 'generic',
-                elements: attachment
-            }
-        }
+        const attachmentObject = attachment
         const data = {
             [attachmentType]: attachmentObject,
             quick_replies: quickReplies
