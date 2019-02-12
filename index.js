@@ -72,7 +72,7 @@ class FBMessenger {
 
     // START TEMPLATES
 
-    async sendQuickRepliesMessage({ id, attachment, attachment_id, quickReplies, ...rest }) {
+    async sendQuickRepliesMessage({ id, attachment, quickReplies, ...rest }) {
         const attachmentType = typeof attachment === 'string' ? 'text' : 'attachment'
         const attachmentObject = typeof attachment === 'string' ? attachment : {
             type: 'template',
@@ -85,7 +85,6 @@ class FBMessenger {
             [attachmentType]: attachmentObject,
             quick_replies: quickReplies
         }
-        if (attachment_id) { data.attachment_id = attachment_id }
         return this.sendMessage({ id, data, ...rest })
     }
 
